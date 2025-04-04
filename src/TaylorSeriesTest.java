@@ -22,7 +22,7 @@ class TaylorSeriesTest {
     @ParameterizedTest
     @DisplayName("Test small positive x values")
     @CsvSource({
-            "0.5235987756, 10", // PI/6
+            "0.5235987756, 10",
             "0.5, 10"
     })
     void testCosSmallPositive(double x, int n){
@@ -50,7 +50,7 @@ class TaylorSeriesTest {
     })
     @DisplayName("Test x near PI/2 (cos(x) near 0)")
     void testCosNearPiOver2(double x, int n) {
-        double expected = Math.cos(x); // Should be close to 0
+        double expected = Math.cos(x);
         double actual = TaylorSeries.calculateCosSeries(x, n);
         assertEquals(expected, actual, DELTA, "Test failed for x = " + x + " (expected near 0)");
     }
@@ -62,7 +62,7 @@ class TaylorSeriesTest {
     })
     @DisplayName("Test x near PI (cos(x) near -1)")
     void testCosNearPi(double x, int n) {
-        double expected = Math.cos(x); // Should be close to -1
+        double expected = Math.cos(x);
         double actual = TaylorSeries.calculateCosSeries(x, n);
         assertEquals(expected, actual, DELTA, "Test failed for x = " + x + " (expected near -1)");
     }
