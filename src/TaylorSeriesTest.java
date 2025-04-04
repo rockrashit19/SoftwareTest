@@ -13,7 +13,7 @@ class TaylorSeriesTest {
     private static final double LOOSE_DELTA = 1e-2;
 
     @Test
-    @DisplayName("Test cos(0")
+    @DisplayName("Test cos(0)")
     void testCosAtZero() {
         double result = TaylorSeries.calculateCosSeries(0, 10);
         assertEquals(1, result, DELTA, "cos(0) should be 1.0");
@@ -134,7 +134,7 @@ class TaylorSeriesTest {
             -0.5235987756,
             4.0
     })
-    @DisplayName("Test Periodicity cos(x) approx equals cos(x + 2pi)")
+    @DisplayName("Test Periodicity cos(x) approx equals cos(x - 2pi)")
     void testCosPeriodicityMinus2Pi(double x) {
         int n = 20;
         double result_x = TaylorSeries.calculateCosSeries(x, n);
@@ -153,7 +153,7 @@ class TaylorSeriesTest {
             -0.5235987756,
             4.0
     })
-    @DisplayName("Test Periodicity cos(x) approx equals cos(x + 2pi)")
+    @DisplayName("Test Periodicity cos(x) approx equals cos(x + 4pi)")
     void testCosPeriodicityPlus4Pi(double x) {
         int n = 20;
         double result_x = TaylorSeries.calculateCosSeries(x, n);
