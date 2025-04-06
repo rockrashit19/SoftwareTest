@@ -10,7 +10,8 @@ class TaylorSeriesTest {
     private static final double DELTA = 1e-8;
     private static final double LOW_ACC = 1e-2;
     private static final double HIGH_ACC = 1e-12;
-    private static final double LOOSE_DELTA = 1e-2;
+    double pInf = Double.POSITIVE_INFINITY;
+    double nInf = Double.NEGATIVE_INFINITY;
 
     @Test
     @DisplayName("Test cos(0)")
@@ -78,7 +79,7 @@ class TaylorSeriesTest {
     void testCosLargeX(double x, int n) {
         double expected = Math.cos(x);
         double actual = TaylorSeries.calculateCosSeries(x, n);
-        assertEquals(expected, actual, LOOSE_DELTA,
+        assertEquals(expected, actual, LOW_ACC,
                 "Test failed for large x = " + x);
     }
 
@@ -179,6 +180,42 @@ class TaylorSeriesTest {
         double result = TaylorSeries.calculateCosSeries(x, 10);
         double expected = Math.cos(x);
         assertEquals(expected, result, HIGH_ACC, "Test failed for acc = " + HIGH_ACC);
+    }
+
+    @Test
+    @DisplayName("Check with positive inf")
+    void testPositiveInf(){
+        double expected = Math.cos(pInf);
+        double result = TaylorSeries.calculateCosSeries(pInf, 10);
+        assertEquals(expected, result, DELTA, "Test failed for x = inf");
+    }
+
+    @Test
+    @DisplayName("Check with negative inf")
+    void testNegativeInf(){
+        double expected = Math.cos(nInf);
+        double result = TaylorSeries.calculateCosSeries(nInf, 10);
+        assertEquals(expected, result, DELTA, "Test failed for x = -inf");
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+            0.1,
+            0.5,
+            Math.PI / 6,
+            1.0,
+            Math.PI / 2,
+            Math.PI,
+            2.5,
+            4.0
+    })
+    @DisplayName("Test Even Function Property: cos(x) = cos(-x)")
+    void testSymmetryProperty(double positiveX) {
+        int n = 10;
+        double resultPositive = TaylorSeries.calculateCosSeries(positiveX, n);
+        double resultNegative = TaylorSeries.calculateCosSeries(-positiveX, n);
+        assertEquals(resultPositive, resultNegative, HIGH_ACC,
+                "Symmetry property f(x) = f(-x) failed for x = " + positiveX + " with N = " + n);
     }
 }
 
