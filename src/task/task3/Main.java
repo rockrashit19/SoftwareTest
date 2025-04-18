@@ -1,21 +1,29 @@
 package task.task3;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        Scenario scenario = new Scenario();
+
         Human human = new Human();
         Dolphin dolphin = new Dolphin();
+        scenario.setupEntities(human, dolphin);
 
-        String reasonForHuman = "мы придумали так много: колесо, Нью-Йорк, войну и т.д.";
-        String reasonForDolphins = "мы всегда только плескались в воде и развлекались";
+        Fact humanInventionsFact = new Fact("Люди придумали так много: колесо, Нью-Йорк, войну и т.д.");
+        humanInventionsFact.makeWidelyKnown();
+        humanInventionsFact.markImportant();
 
-        human.reflectOnIntelligence(reasonForHuman);
-        dolphin.reflectOnIntelligence(reasonForDolphins);
+        Fact dolphinActivitiesFact = new Fact("Дельфины всегда только плескались в воде и развлекались");
+        dolphinActivitiesFact.makeWidelyKnown();
+        dolphinActivitiesFact.markImportant();
 
-        System.out.println("\n--- Проверка состояний ---");
-        System.out.println("Человек считает себя разумнее? " + human.isBelievesHumansAreSmarter());
-        System.out.println("Причина убеждения человека: " + human.getReasonForBelief());
-        System.out.println("Дельфин считает себя разумнее? " + dolphin.isBelievesDolphinsAreSmarter());
-        System.out.println("Причина убеждения дельфина: " + dolphin.getReasonForBelief());
-        System.out.println("--------------------------");
+        Fact anotherHumanFact = new Fact("Люди строят сложные компьютеры");
+        Fact anotherDolphinFact = new Fact("Дельфины используют сложную систему эхолокации");
+
+        scenario.addFact(humanInventionsFact);
+        scenario.addFact(dolphinActivitiesFact);
+        scenario.addFact(anotherHumanFact);
+        scenario.addFact(anotherDolphinFact);
+        
+        scenario.run();
     }
 }
