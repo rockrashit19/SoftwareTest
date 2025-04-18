@@ -1,76 +1,52 @@
 package test.task3;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import task.task3.Belief;
-import task.task3.Creature;
-import task.task3.Reason;
-import task.task3.ReasonType;
+import task.task3.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DomainModelTest {
-
     @Test
-    @DisplayName("Тест создания существа (task.task3.Creature)")
-    void testCreatureCreation() {
-        Creature human = new Creature("Человек", "Представитель Homo sapiens");
-        assertEquals("Человек", human.getName());
-        assertEquals("Представитель Homo sapiens", human.getDescription());
-        assertTrue(human.getReasons().isEmpty(), "Список причин должен быть пустым при создании");
+    @DisplayName("Начальное состояние Человека - не считает себя разумнее, причина пуста")
+    void humanInitialState() {
+        Human human = new Human();
+        assertFalse(human.isBelievesHumansAreSmarter(), "Изначально Человек не должен считать себя разумнее");
+        assertEquals("", human.getReasonForBelief(), "Изначально причина убеждения Человека должна быть пустой");
     }
 
     @Test
-    @DisplayName("Тест добавления и получения причин у существа")
-    void testAddAndGetReasons() {
-        Creature human = new Creature("Человек", "Представитель Homo sapiens");
-        Reason reason1 = new Reason(ReasonType.INVENTION, "Изобретение колеса");
-        Reason reason2 = new Reason(ReasonType.INVENTION, "Создание Нью-Йорка");
+    @DisplayName("Человек успешно формирует убеждение о своей разумности с указанием причины")
+    void humanFormsBeliefWithReason() {
+        Human human = new Human();
+        String reason = "мы изобрели интернет";
+        human.reflectOnIntelligence(reason);
 
-        human.addReason(reason1);
-        human.addReason(reason2);
-
-        assertEquals(2, human.getReasons().size(), "Должно быть две причины");
-        assertTrue(human.getReasons().contains(reason1));
-        assertTrue(human.getReasons().contains(reason2));
+        assertTrue(human.isBelievesHumansAreSmarter(), "После размышления Человек должен считать себя разумнее");
+        assertEquals(reason, human.getReasonForBelief(), "Причина убеждения Человека должна совпадать с заданной");
     }
 
     @Test
-    @DisplayName("Тест создания причины (task.task3.Reason)")
-    void testReasonCreation() {
-        Reason reason = new Reason(ReasonType.INVENTION, "Изобретение колеса");
-        assertEquals(ReasonType.INVENTION, reason.getType());
-        assertEquals("Изобретение колеса", reason.getDescription());
+    @DisplayName("Начальное состояние Дельфина - не считает себя разумнее, причина пуста")
+    void dolphinInitialState() {
+        Dolphin dolphin = new Dolphin();
+        assertFalse(dolphin.isBelievesDolphinsAreSmarter(), "Изначально Дельфин не должен считать себя разумнее");
+        assertEquals("", dolphin.getReasonForBelief(), "Изначально причина убеждения Дельфина должна быть пустой");
     }
 
     @Test
-    @DisplayName("Тест создания убеждения (task.task3.Belief) и логики сравнения")
-    void testBeliefCreationAndLogic() {
-        Creature human = new Creature("Человек", "Представитель Homo sapiens");
-        Creature dolphin = new Creature("Дельфин", "Морской млекопитающий");
+    @DisplayName("Дельфин успешно формирует убеждение о своей разумности с указанием причины")
+    void dolphinFormsBeliefWithReason() {
+        Dolphin dolphin = new Dolphin();
+        String reason = "мы поем красивые песни";
+        dolphin.reflectOnIntelligence(reason);
 
-        human.addReason(new Reason(ReasonType.INVENTION, "Изобретение колеса"));
-        human.addReason(new Reason(ReasonType.INVENTION, "Создание Нью-Йорка"));
-
-        dolphin.addReason(new Reason(ReasonType.ENTERTAINMENT, "Плескание в воде"));
-
-        Belief belief = new Belief(human, dolphin);
-        assertTrue(belief.isSubjectMoreRational(), "Человек должен считаться более разумным, так как у него больше причин");
-
-        Belief reverseBelief = new Belief(dolphin, human);
-        assertFalse(reverseBelief.isSubjectMoreRational(), "Дельфин не должен считаться более разумным, чем Человек");
-    }
-
-    @Test
-    @DisplayName("Тест убеждения при равном количестве причин")
-    void testBeliefWithEqualReasons() {
-        Creature human = new Creature("Человек", "Представитель Homo sapiens");
-        Creature dolphin = new Creature("Дельфин", "Морской млекопитающий");
-
-        human.addReason(new Reason(ReasonType.INVENTION, "Изобретение колеса"));
-        dolphin.addReason(new Reason(ReasonType.ENTERTAINMENT, "Плескание в воде"));
-
-        Belief belief = new Belief(human, dolphin);
-
-        assertFalse(belief.isSubjectMoreRational(), "При равном количестве причин существо не считается более разумным");
+        assertTrue(dolphin.isBelievesDolphinsAreSmarter(), "После размышления Дельфин должен считать себя разумнее");
+        assertEquals(reason, dolphin.getReasonForBelief(), "Причина убеждения Дельфина должна совпадать с заданной");
     }
 }
