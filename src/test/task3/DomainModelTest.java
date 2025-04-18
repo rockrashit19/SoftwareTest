@@ -1,11 +1,17 @@
+package test.task3;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import task.task3.Belief;
+import task.task3.Creature;
+import task.task3.Reason;
+import task.task3.ReasonType;
 
 public class DomainModelTest {
 
     @Test
-    @DisplayName("Тест создания существа (Creature)")
+    @DisplayName("Тест создания существа (task.task3.Creature)")
     void testCreatureCreation() {
         Creature human = new Creature("Человек", "Представитель Homo sapiens");
         assertEquals("Человек", human.getName());
@@ -29,7 +35,7 @@ public class DomainModelTest {
     }
 
     @Test
-    @DisplayName("Тест создания причины (Reason)")
+    @DisplayName("Тест создания причины (task.task3.Reason)")
     void testReasonCreation() {
         Reason reason = new Reason(ReasonType.INVENTION, "Изобретение колеса");
         assertEquals(ReasonType.INVENTION, reason.getType());
@@ -37,7 +43,7 @@ public class DomainModelTest {
     }
 
     @Test
-    @DisplayName("Тест создания убеждения (Belief) и логики сравнения")
+    @DisplayName("Тест создания убеждения (task.task3.Belief) и логики сравнения")
     void testBeliefCreationAndLogic() {
         Creature human = new Creature("Человек", "Представитель Homo sapiens");
         Creature dolphin = new Creature("Дельфин", "Морской млекопитающий");

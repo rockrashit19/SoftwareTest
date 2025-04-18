@@ -1,3 +1,5 @@
+package task.task3;
+
 public class Reason {
     private final ReasonType type;
     private final String description;
@@ -17,7 +19,7 @@ public class Reason {
 
     @Override
     public String toString() {
-        return "Reason{" +
+        return "task.task3.Reason{" +
                 "type=" + type +
                 ", description='" + description + '\'' +
                 '}';

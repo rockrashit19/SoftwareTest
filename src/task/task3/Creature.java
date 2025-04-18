@@ -1,3 +1,5 @@
+package task.task3;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Creature {
 
     @Override
     public String toString() {
-        return "Creature{" +
+        return "task.task3.Creature{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", reasons=" + reasons +

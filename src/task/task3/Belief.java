@@ -1,3 +1,5 @@
+package task.task3;
+
 public class Belief {
     private final Creature subject;
     private final Creature object;
@@ -21,7 +23,7 @@ public class Belief {
 
     @Override
     public String toString() {
-        return "Belief{" +
+        return "task.task3.Belief{" +
                 "subject=" + subject.getName() +
                 ", object=" + object.getName() +
                 '}';

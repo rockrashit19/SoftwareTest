@@ -1,3 +1,5 @@
+package task.task1;
+
 public class TaylorSeries {
     public static double calculateCosSeries(double x, int N){
         if (N <= 0) {

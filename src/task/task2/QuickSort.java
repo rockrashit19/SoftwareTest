@@ -1,3 +1,5 @@
+package task.task2;
+
 public class QuickSort {
     public static void quickSort(int[] array, int low, int high) {
         if (array.length == 0)
