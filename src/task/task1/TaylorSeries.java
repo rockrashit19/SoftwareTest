@@ -18,4 +18,3 @@ public class TaylorSeries {
         return sum;
     }
 }
-
